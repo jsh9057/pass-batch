@@ -1,6 +1,8 @@
 package com.jsh.pass.repository.booking;
 
 import com.jsh.pass.repository.BaseEntity;
+import com.jsh.pass.repository.pass.PassEntity;
+import com.jsh.pass.repository.user.UserEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,5 +30,9 @@ public class BookingEntity extends BaseEntity {
     private LocalDateTime startedAt;
     private LocalDateTime endedAt;
     private LocalDateTime cancelledAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    private UserEntity userEntity;
 
 }
