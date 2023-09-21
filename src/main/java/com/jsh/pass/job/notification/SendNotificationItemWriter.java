@@ -3,6 +3,7 @@ package com.jsh.pass.job.notification;
 import com.jsh.pass.adapter.message.KakaoTalkMessageAdapter;
 import com.jsh.pass.repository.notification.NotificationEntity;
 import com.jsh.pass.repository.notification.NotificationRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.stereotype.Component;
@@ -25,10 +26,10 @@ public class SendNotificationItemWriter implements ItemWriter<NotificationEntity
     public void write(List<? extends NotificationEntity> notificationEntities) throws Exception {
         int count = 0;
 
-        for(NotificationEntity notificationEntity : notificationEntities){
+        for (NotificationEntity notificationEntity : notificationEntities) {
             boolean successful = kakaoTalkMessageAdapter.sendKakaoTalkMessage(notificationEntity.getUuid(), notificationEntity.getText());
 
-            if(successful){
+            if (successful) {
                 notificationEntity.setSent(true);
                 notificationEntity.setSentAt(LocalDateTime.now());
                 notificationRepository.save(notificationEntity);
@@ -37,5 +38,7 @@ public class SendNotificationItemWriter implements ItemWriter<NotificationEntity
 
         }
         log.info("SendNotificationItemWriter - write: 수업 전 알람 {}/{}건 전송 성공", count, notificationEntities.size());
+
     }
+
 }

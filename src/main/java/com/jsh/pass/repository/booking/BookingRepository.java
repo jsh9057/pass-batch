@@ -10,7 +10,7 @@ public interface BookingRepository extends JpaRepository<BookingEntity, Integer>
     @Modifying
     @Query(value = "UPDATE BookingEntity b" +
             "          SET b.usedPass = :usedPass," +
-            "              b.modifiedAt = CURRENT TIMESTAMP " +
+            "              b.modifiedAt = CURRENT_TIMESTAMP" +
             "        WHERE b.passSeq = :passSeq")
     int updateUsedPass(Integer passSeq, boolean usedPass);
 }

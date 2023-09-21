@@ -20,14 +20,14 @@ public class KakaoTalkMessageAdapter {
 
     }
 
-    public boolean sendKakaoTalkMessage(final String uuid, final String text){
+    public boolean sendKakaoTalkMessage(final String uuid, final String text) {
         KakaoTalkMessageResponse response = webClient.post().uri("/v1/api/talk/friends/message/default/send")
                 .body(BodyInserters.fromValue(new KakaoTalkMessageRequest(uuid, text)))
                 .retrieve()
                 .bodyToMono(KakaoTalkMessageResponse.class)
                 .block();
 
-        if (response == null || response.getSuccessfulReceiverUuids() == null){
+        if (response == null || response.getSuccessfulReceiverUuids() == null) {
             return false;
         }
         return response.getSuccessfulReceiverUuids().size() > 0;
