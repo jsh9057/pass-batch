@@ -1,5 +1,6 @@
 package com.jsh.pass.job.pass;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -7,9 +8,10 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@Slf4j
 @Configuration
 public class AddPassesJobConfig {
-
+    // @EnableBatchProcessing로 인해 Bean으로 제공된 JobBuilderFactory, StepBuilderFactory
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
     private final AddPassesTasklet addPassesTasklet;
@@ -21,18 +23,18 @@ public class AddPassesJobConfig {
     }
 
     @Bean
-    public Job addPassesJob(){
+    public Job addPassesJob() {
         return this.jobBuilderFactory.get("addPassesJob")
                 .start(addPassesStep())
                 .build();
     }
 
+
     @Bean
-    public Step addPassesStep(){
+    public Step addPassesStep() {
         return this.stepBuilderFactory.get("addPassesStep")
                 .tasklet(addPassesTasklet)
                 .build();
-
     }
 
 }

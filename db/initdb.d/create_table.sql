@@ -1,3 +1,9 @@
+/*
+ id varchar(20)
+ status, event varchar(10) - enum
+ 그 외 varchar(50)
+ */
+
 CREATE TABLE `package`
 (
     `package_seq`  int         NOT NULL AUTO_INCREMENT COMMENT '패키지 순번',
@@ -80,7 +86,7 @@ CREATE TABLE `user_group_mapping`
 CREATE TABLE `notification`
 (
     `notification_seq` int           NOT NULL AUTO_INCREMENT COMMENT '알람 순번',
-    `uuid`          varchar(20)   NOT NULL COMMENT '사용자 uuid (카카오톡)',
+    `uuid`             varchar(20)   NOT NULL COMMENT '사용자 uuid (카카오톡)',
     `event`            varchar(10)   NOT NULL COMMENT '이벤트',
     `text`             varchar(1000) NOT NULL COMMENT '알람 내용',
     `sent`             tinyint(1)    NOT NULL DEFAULT '0' COMMENT '발송 여부',
@@ -88,8 +94,6 @@ CREATE TABLE `notification`
     `created_at`       timestamp     NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '생성 일시',
     `modified_at`      timestamp              DEFAULT NULL COMMENT '수정 일시',
     PRIMARY KEY (`notification_seq`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='알람';
-
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='알람';
 
 CREATE TABLE `statistics`
